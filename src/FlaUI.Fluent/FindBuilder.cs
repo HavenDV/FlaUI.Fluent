@@ -134,9 +134,11 @@ namespace FlaUI.Fluent
         /// 
         /// </summary>
         /// <param name="func"></param>
+        /// <param name="modifierName"></param>
         /// <returns></returns>
-        public FindBuilder By(Func<ConditionFactory, ConditionBase> func)
+        public FindBuilder By(Func<ConditionFactory, ConditionBase> func, string modifierName)
         {
+            Modifiers.Add(modifierName);
             Conditions.Add(func(Element.ConditionFactory));
 
             return this;
@@ -149,9 +151,7 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder ByName(string value)
         {
-            Modifiers.Add($"Name: {value}");
-
-            return By(factory => factory.ByName(value));
+            return By(factory => factory.ByName(value), $"{nameof(ByName)}: {value}");
         }
 
         /// <summary>
@@ -161,9 +161,7 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder ByClassName(string value)
         {
-            Modifiers.Add($"ClassName: {value}");
-
-            return By(factory => factory.ByClassName(value));
+            return By(factory => factory.ByClassName(value), $"{nameof(ByClassName)}: {value}");
         }
 
         /// <summary>
@@ -173,9 +171,17 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder ByHelpText(string value)
         {
-            Modifiers.Add($"HelpText: {value}");
+            return By(factory => factory.ByHelpText(value), $"{nameof(ByHelpText)}: {value}");
+        }
 
-            return By(factory => factory.ByHelpText(value));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FindBuilder ByValue(string value)
+        {
+            return By(factory => factory.ByValue(value), $"{nameof(ByValue)}: {value}");
         }
 
         /// <summary>
@@ -185,9 +191,7 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder ByAutomationId(string value)
         {
-            Modifiers.Add($"AutomationId: {value}");
-
-            return By(factory => factory.ByAutomationId(value));
+            return By(factory => factory.ByAutomationId(value), $"{nameof(ByAutomationId)}: {value}");
         }
 
         /// <summary>
@@ -197,9 +201,7 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder ByText(string value)
         {
-            Modifiers.Add($"Text: {value}");
-
-            return By(factory => factory.ByText(value));
+            return By(factory => factory.ByText(value), $"{nameof(ByText)}: {value}");
         }
 
         /// <summary>
@@ -209,12 +211,42 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder ByControlType(ControlType value)
         {
-            Modifiers.Add($"ControlType: {value}");
+            return By(factory => factory.ByControlType(value), $"{nameof(ByControlType)}: {value}");
+        }
 
-            return By(factory => factory.ByControlType(value));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FindBuilder ByLocalizedControlType(string value)
+        {
+            return By(factory => factory.ByLocalizedControlType(value), $"{nameof(ByLocalizedControlType)}: {value}");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FindBuilder ByFrameworkId(string value)
+        {
+            return By(factory => factory.ByFrameworkId(value), $"{nameof(ByFrameworkId)}: {value}");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FindBuilder ByProcessId(int value)
+        {
+            return By(factory => factory.ByProcessId(value), $"{nameof(ByProcessId)}: {value}");
         }
 
         #endregion
+
+        #region Actions
 
         /// <summary>
         /// 
@@ -241,6 +273,8 @@ namespace FlaUI.Fluent
 
             return this;
         }
+
+        #endregion
 
         #endregion
 

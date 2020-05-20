@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.Fluent", "src\FlaUI.F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{35C6C492-DDF6-4D25-954B-ADE2FCA10DA2}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 		.github\workflows\dotnetcore.yml = .github\workflows\dotnetcore.yml
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.Fluent.Tests", "src\FlaUI.Fluent.Tests\FlaUI.Fluent.Tests.csproj", "{F8472CB8-403C-419F-852F-C6E22D7067AF}"

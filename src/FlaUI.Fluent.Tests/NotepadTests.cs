@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace FlaUI.Fluent.Tests
 {
     [TestFixture]
-    public class RationalWillTests : FlaUITestBase
+    public class NotepadTests : FlaUITestBase
     {
         #region Properties
 

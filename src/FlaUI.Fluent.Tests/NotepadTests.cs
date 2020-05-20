@@ -46,7 +46,7 @@ namespace FlaUI.Fluent.Tests
 
             // Set text
             window
-                .BuildFind().Nested().ByAutomationId("15").Retry(Timeout).First()
+                .BuildFind().AmongChildren().ByAutomationId("15").Retry(Timeout).First()
                 .Patterns
                 .Value
                 .Pattern

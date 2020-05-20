@@ -8,14 +8,14 @@ using FlaUI.Core.Definitions;
 namespace FlaUI.Fluent
 {
     /// <summary>
-    /// 
+    /// Fluent class for AutomationElement
     /// </summary>
     public class FindBuilder
     {
         #region Properties
 
         private AutomationElement Element { get; }
-        private FindType Type { get; set; } = FindType.Nested;
+        private TreeScope TreeScope { get; set; } = TreeScope.None;
         private RetrySettings? RetrySettings { get; set; }
 
         private List<string> Modifiers { get; } = new List<string>();
@@ -29,22 +29,25 @@ namespace FlaUI.Fluent
         /// <summary>
         /// 
         /// </summary>
-        public event EventHandler<(FindBuilder builder, AutomationElement? element)>? FindOccurred;
+        public event EventHandler<IList<AutomationElement>>? FindOccurred;
 
-        private void OnFindOccurred((FindBuilder builder, AutomationElement? element) value)
+        private void OnFindOccurred(IList<AutomationElement> value)
         {
             FindOccurred?.Invoke(this, value);
+        }
+
+        private void OnFindOccurred(AutomationElement? value)
+        {
+            OnFindOccurred(value != null
+                ? new List<AutomationElement> { value }
+                : new List<AutomationElement>());
         }
 
         #endregion
 
         #region Constructors
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="element"></param>
-        public FindBuilder(AutomationElement element)
+        internal FindBuilder(AutomationElement element)
         {
             Element = element ?? throw new ArgumentNullException(nameof(element));
         }
@@ -56,25 +59,69 @@ namespace FlaUI.Fluent
         #region Type
 
         /// <summary>
-        /// 
+        /// Sets scope.
         /// </summary>
+        /// <param name="scope"></param>
         /// <returns></returns>
-        public FindBuilder Nested()
+        public FindBuilder Among(TreeScope scope)
         {
-            Type = FindType.Nested;
+            TreeScope = scope;
 
             return this;
         }
 
         /// <summary>
-        /// 
+        /// The scope includes the element itself.
         /// </summary>
         /// <returns></returns>
-        public FindBuilder Descendant()
+        public FindBuilder AmongElement()
         {
-            Type = FindType.Descendant;
+            return Among(TreeScope.Element);
+        }
 
-            return this;
+        /// <summary>
+        /// The scope includes children of the element.
+        /// </summary>
+        /// <returns></returns>
+        public FindBuilder AmongChildren()
+        {
+            return Among(TreeScope.Children);
+        }
+
+        /// <summary>
+        /// The scope includes children and more distant descendants of the element.
+        /// </summary>
+        /// <returns></returns>
+        public FindBuilder AmongDescendants()
+        {
+            return Among(TreeScope.Descendants);
+        }
+
+        /// <summary>
+        /// The scope includes the element and all its descendants.
+        /// </summary>
+        /// <returns></returns>
+        public FindBuilder AmongSubtree()
+        {
+            return Among(TreeScope.Subtree);
+        }
+
+        /// <summary>
+        /// The scope includes the parent of the element.
+        /// </summary>
+        /// <returns></returns>
+        public FindBuilder AmongParents()
+        {
+            return Among(TreeScope.Parent);
+        }
+
+        /// <summary>
+        /// The scope includes the parent and more distant ancestors of the element.
+        /// </summary>
+        /// <returns></returns>
+        public FindBuilder AmongAncestors()
+        {
+            return Among(TreeScope.Ancestors);
         }
 
         #endregion
@@ -228,14 +275,66 @@ namespace FlaUI.Fluent
 
         #region End
 
+        private AutomationElement[] AllInternal()
+        {
+            return TreeScope switch
+            {
+                TreeScope.Children => Element.FindAllNested(Conditions.ToArray()),
+                TreeScope.Descendants => Element.FindAll(TreeScope, Conditions.Single()),
+                TreeScope.Element => Element.FindAll(TreeScope, Conditions.Single()),
+                TreeScope.Subtree => Element.FindAll(TreeScope, Conditions.Single()),
+                TreeScope.Parent => Element.FindAll(TreeScope, Conditions.Single()),
+                TreeScope.Ancestors => Element.FindAll(TreeScope, Conditions.Single()),
+                TreeScope.None => new []{ Element },
+                _ => throw new InvalidOperationException($"Unknown tree scope: {TreeScope}.")
+            };
+        }
+
         private AutomationElement? FirstInternal()
         {
-            return Type switch
+            return TreeScope switch
             {
-                FindType.Nested => Element.FindFirstNested(Conditions.ToArray()),
-                FindType.Descendant => Element.FindFirstDescendant(Conditions.Single()),
-                _ => throw new InvalidOperationException($"Unknown type: {Type}")
+                TreeScope.Children => Element.FindFirstNested(Conditions.ToArray()),
+                TreeScope.Descendants => Element.FindFirst(TreeScope, Conditions.Single()),
+                TreeScope.Element => Element.FindFirst(TreeScope, Conditions.Single()),
+                TreeScope.Subtree => Element.FindFirst(TreeScope, Conditions.Single()),
+                TreeScope.Parent => Element.FindFirst(TreeScope, Conditions.Single()),
+                TreeScope.Ancestors => Element.FindFirst(TreeScope, Conditions.Single()),
+                TreeScope.None => Element,
+                _ => throw new ArgumentOutOfRangeException($"Unknown tree scope: {TreeScope}.")
             };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public AutomationElement[] ToArray()
+        {
+            var values = RetrySettings != null
+                ? Core.Tools.Retry.Find(AllInternal, RetrySettings)
+                : AllInternal();
+
+            foreach (var type in Actions)
+            {
+                switch (type)
+                {
+                    case ActionType.Parent:
+                        values = values.Select(value => value?.Parent).ToArray();
+                        break;
+
+                    case ActionType.Child:
+                        values = values.Select(value => value?.FindFirstChild()).ToArray();
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException($"Unknown action type: {type}.");
+                }
+            }
+
+            OnFindOccurred(values);
+
+            return values;
         }
 
         /// <summary>
@@ -265,7 +364,7 @@ namespace FlaUI.Fluent
                 }
             }
             
-            OnFindOccurred((this, value));
+            OnFindOccurred(value);
 
             return value;
         }
@@ -295,22 +394,6 @@ namespace FlaUI.Fluent
         #endregion
 
         #region Enums
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum FindType
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            Nested,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            Descendant,
-        }
 
         /// <summary>
         /// 

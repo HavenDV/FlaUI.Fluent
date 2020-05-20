@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
-    <Version>3.0.0.101</Version>
+    <Version>3.0.0.102</Version>
     <Authors>havendv</Authors>
     <Company>havendv</Company>
     <Description>Fluent interface for Find methods of FlaUI AutomationElement's</Description>
     <PackageProjectUrl>https://github.com/HavenDV/FlaUI.Fluent</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HavenDV/FlaUI.Fluent</RepositoryUrl>
     <PackageTags>FlaUI, FlaUI.Fluent, Fluent, UIA3, havendv, H</PackageTags>
-    <PackageReleaseNotes>Added Among methods. Added ToArray() method.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added new By methods</PackageReleaseNotes>
     <PackageLicenseFile></PackageLicenseFile>
     <Copyright>Copyright (c) 2020 havendv</Copyright>
     <RepositoryType>git</RepositoryType>

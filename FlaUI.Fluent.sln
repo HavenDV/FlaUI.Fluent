@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\dotnetcore.yml = .github\workflows\dotnetcore.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaUI.Fluent.Tests", "src\FlaUI.Fluent.Tests\FlaUI.Fluent.Tests.csproj", "{F8472CB8-403C-419F-852F-C6E22D7067AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{F95ECB30-6071-4451-9B2E-D4A15B667EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F95ECB30-6071-4451-9B2E-D4A15B667EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F95ECB30-6071-4451-9B2E-D4A15B667EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8472CB8-403C-419F-852F-C6E22D7067AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8472CB8-403C-419F-852F-C6E22D7067AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8472CB8-403C-419F-852F-C6E22D7067AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8472CB8-403C-419F-852F-C6E22D7067AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

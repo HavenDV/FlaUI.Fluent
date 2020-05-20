@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Authors>havendv</Authors>
     <Company>havendv</Company>
     <Description>Fluent interface for Find methods of FlaUI AutomationElement's</Description>
@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FlaUI.UIA3" Version="3.0.0" />
+    <PackageReference Include="FlaUI.UIA3" Version="*" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework)' == 'net45'" />
   </ItemGroup>
 

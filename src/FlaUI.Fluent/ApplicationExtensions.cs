@@ -5,8 +5,19 @@ using FlaUI.Core.Tools;
 
 namespace FlaUI.Fluent
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ApplicationExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="automation"></param>
+        /// <param name="func"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         public static Window WaitMainWindow(
             this Application application, 
             AutomationBase automation, 
@@ -35,6 +46,14 @@ namespace FlaUI.Fluent
             return window;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="automation"></param>
+        /// <param name="func"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
         public static Window WaitMainWindow(
             this Application application, 
             AutomationBase automation, 

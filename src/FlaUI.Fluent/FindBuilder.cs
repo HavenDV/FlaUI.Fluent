@@ -7,6 +7,9 @@ using FlaUI.Core.Definitions;
 
 namespace FlaUI.Fluent
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FindBuilder
     {
         #region Properties
@@ -23,6 +26,9 @@ namespace FlaUI.Fluent
 
         #region Events
 
+        /// <summary>
+        /// 
+        /// </summary>
         public event EventHandler<(FindBuilder builder, AutomationElement? element)>? FindOccurred;
 
         private void OnFindOccurred((FindBuilder builder, AutomationElement? element) value)
@@ -34,6 +40,10 @@ namespace FlaUI.Fluent
 
         #region Constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="element"></param>
         public FindBuilder(AutomationElement element)
         {
             Element = element ?? throw new ArgumentNullException(nameof(element));
@@ -45,6 +55,10 @@ namespace FlaUI.Fluent
 
         #region Type
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public FindBuilder Nested()
         {
             Type = FindType.Nested;
@@ -52,6 +66,10 @@ namespace FlaUI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public FindBuilder Descendant()
         {
             Type = FindType.Descendant;
@@ -65,6 +83,11 @@ namespace FlaUI.Fluent
 
         #region By
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns></returns>
         public FindBuilder By(Func<ConditionFactory, ConditionBase> func)
         {
             Conditions.Add(func(Element.ConditionFactory));
@@ -72,6 +95,11 @@ namespace FlaUI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public FindBuilder ByName(string value)
         {
             Modifiers.Add($"Name: {value}");
@@ -79,6 +107,11 @@ namespace FlaUI.Fluent
             return By(factory => factory.ByName(value));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public FindBuilder ByClassName(string value)
         {
             Modifiers.Add($"ClassName: {value}");
@@ -86,6 +119,11 @@ namespace FlaUI.Fluent
             return By(factory => factory.ByClassName(value));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public FindBuilder ByHelpText(string value)
         {
             Modifiers.Add($"HelpText: {value}");
@@ -93,6 +131,11 @@ namespace FlaUI.Fluent
             return By(factory => factory.ByHelpText(value));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public FindBuilder ByAutomationId(string value)
         {
             Modifiers.Add($"AutomationId: {value}");
@@ -100,6 +143,11 @@ namespace FlaUI.Fluent
             return By(factory => factory.ByAutomationId(value));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public FindBuilder ByText(string value)
         {
             Modifiers.Add($"Text: {value}");
@@ -107,6 +155,11 @@ namespace FlaUI.Fluent
             return By(factory => factory.ByText(value));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public FindBuilder ByControlType(ControlType value)
         {
             Modifiers.Add($"ControlType: {value}");
@@ -116,6 +169,10 @@ namespace FlaUI.Fluent
 
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public FindBuilder Parent()
         {
             Modifiers.Add("Action: Parent");
@@ -125,6 +182,10 @@ namespace FlaUI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public FindBuilder Child()
         {
             Modifiers.Add("Action: Child");
@@ -138,6 +199,11 @@ namespace FlaUI.Fluent
 
         #region Retry
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         public FindBuilder Retry(RetrySettings settings)
         {
             RetrySettings = settings;
@@ -145,6 +211,11 @@ namespace FlaUI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
         public FindBuilder Retry(TimeSpan timeout)
         {
             return Retry(new RetrySettings
@@ -167,6 +238,10 @@ namespace FlaUI.Fluent
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public AutomationElement? FirstOrDefault()
         {
             var value = RetrySettings != null
@@ -195,6 +270,10 @@ namespace FlaUI.Fluent
             return value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public AutomationElement First()
         {
             return FirstOrDefault() ?? 
@@ -203,6 +282,10 @@ namespace FlaUI.Fluent
 
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $@"FindBuilder.Modifiers:
@@ -213,15 +296,35 @@ namespace FlaUI.Fluent
 
         #region Enums
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum FindType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             Nested,
+
+            /// <summary>
+            /// 
+            /// </summary>
             Descendant,
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum ActionType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             Parent,
+
+            /// <summary>
+            /// 
+            /// </summary>
             Child,
         }
 

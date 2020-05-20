@@ -6,6 +6,28 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Label="Nuget">
+    <Version>0.1.0</Version>
+    <Authors>havendv</Authors>
+    <Company>havendv</Company>
+    <Description>Fluent interface for Find methods of FlaUI AutomationElement's</Description>
+    <PackageProjectUrl>https://github.com/HavenDV/FlaUI.Fluent</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HavenDV/FlaUI.Fluent</RepositoryUrl>
+    <PackageTags>FlaUI, FlaUI.Fluent, Fluent, UIA3, havendv, H</PackageTags>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageLicenseFile></PackageLicenseFile>
+    <Copyright>Copyright (c) 2020 havendv</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="FlaUI.UIA3" Version="3.0.0" />
   </ItemGroup>

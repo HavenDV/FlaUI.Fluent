@@ -17,7 +17,7 @@ namespace FlaUI.Fluent
 
             var element = Retry.Find(() =>
             {
-                window = application.GetMainWindow(automation);
+                window = application.GetMainWindow(automation, Retry.DefaultInterval);
 
                 return window == null
                     ? null

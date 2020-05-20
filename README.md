@@ -7,7 +7,6 @@ Fluent interface for FlaUI
 
 ### Used documentation
 1. [FlaUI](https://github.com/FlaUI/FlaUI)
-1. [FlaUI.Fluent](https://github.com/HavenDV/FlaUI.Fluent)
 2. [FlaUI Examples](https://github.com/FlaUI/FlaUI/blob/master/src/FlaUI.Core.UITests)
 3. [Accessing Standard UIA Properties using FlaUI](https://www.youtube.com/watch?v=EOKPiLykNVE)
 4. [FlaUInspect binaries](https://github.com/FlaUI/FlaUInspect/releases)

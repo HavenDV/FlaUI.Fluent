@@ -67,7 +67,7 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder Among(TreeScope scope)
         {
-            Modifiers.Add($"Among TreeScope: {scope}");
+            Modifiers.Add($"Among: {scope}");
             TreeScope = scope;
 
             return this;

@@ -56,7 +56,9 @@ namespace FlaUI.Fluent
 
         #region Methods
 
-        #region Type
+        #region Modifiers
+
+        #region Among
 
         /// <summary>
         /// Sets scope.
@@ -65,6 +67,7 @@ namespace FlaUI.Fluent
         /// <returns></returns>
         public FindBuilder Among(TreeScope scope)
         {
+            Modifiers.Add($"Among TreeScope: {scope}");
             TreeScope = scope;
 
             return this;
@@ -125,8 +128,6 @@ namespace FlaUI.Fluent
         }
 
         #endregion
-
-        #region Modifiers
 
         #region By
 
@@ -252,11 +253,10 @@ namespace FlaUI.Fluent
         /// 
         /// </summary>
         /// <returns></returns>
-        public FindBuilder Parent()
+        public FindBuilder Action(ActionType actionType)
         {
-            Modifiers.Add("Action: Parent");
-
-            Actions.Add(ActionType.Parent);
+            Modifiers.Add($"Action: {actionType}");
+            Actions.Add(actionType);
 
             return this;
         }
@@ -265,13 +265,18 @@ namespace FlaUI.Fluent
         /// 
         /// </summary>
         /// <returns></returns>
+        public FindBuilder Parent()
+        {
+            return Action(ActionType.Parent);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public FindBuilder Child()
         {
-            Modifiers.Add("Action: Child");
-
-            Actions.Add(ActionType.Child);
-
-            return this;
+            return Action(ActionType.Child);
         }
 
         #endregion

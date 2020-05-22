@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using FlaUI.Core;
+using FlaUI.Core.AutomationElements;
 using FlaUI.TestUtilities;
 using FlaUI.UIA3;
 using NUnit.Framework;
@@ -29,7 +30,8 @@ namespace FlaUI.Fluent.Tests
             return Application.Launch(new ProcessStartInfo("notepad.exe")
             {
                 UseShellExecute = true,
-            });
+                WindowStyle = ProcessWindowStyle.Maximized,
+        });
         }
 
         #endregion
@@ -52,25 +54,23 @@ namespace FlaUI.Fluent.Tests
                 .Pattern
                 .SetValue("Hello, World!");
 
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-
-            /*
             // Open File menu
             window
-                .BuildFind().Nested().ByAutomationId("MenuBar").Retry(Timeout).Child().First()
+                .BuildFind().AmongChildren().ByAutomationId("MenuBar").Retry(Timeout).Child().First()
                 .AsMenuItem()
-                .Expand();
+                .Click();
 
+            // Invoke Exit
             window
-                .BuildFind().Descendant().ByAutomationId("7").Retry(Timeout).First()
+                .BuildFind().AmongDescendants().ByAutomationId("7").Retry(Timeout).First()
                 .AsMenuItem()
                 .Invoke();
 
+            // Discard Changes
             window
-                .BuildFind().Descendant().ByAutomationId("CommandButton_7").Retry(Timeout).First()
+                .BuildFind().AmongDescendants().ByAutomationId("CommandButton_7").Retry(Timeout).First()
                 .AsButton()
                 .Invoke();
-           */
         }
     }
 }

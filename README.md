@@ -1,7 +1,8 @@
 # [FlaUI.Fluent](https://github.com/HavenDV/FlaUI.Fluent/) 
 
 [![Language](https://img.shields.io/badge/language-C%23-blue.svg?style=flat-square)](https://github.com/HavenDV/FlaUI.Fluent/search?l=C%23&o=desc&s=&type=Code) 
-[![Requirements](https://img.shields.io/badge/Requirements-.NET%20Core%203.1-blue.svg)](https://github.com/dotnet/core/tree/master/release-notes/3.1)
+[![Requirements](https://img.shields.io/badge/Requirements-.NET%20Standard%202.0-blue.svg)](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md) 
+[![Requirements](https://img.shields.io/badge/Requirements-.NET%20Framework%204.5-blue.svg)]()
 
 Fluent interface for FlaUI
 

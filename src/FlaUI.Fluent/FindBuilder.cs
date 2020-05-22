@@ -313,7 +313,7 @@ namespace FlaUI.Fluent
         #endregion
 
         #region End
-
+        
         private AutomationElement[] AllInternal()
         {
             return TreeScope switch
@@ -325,7 +325,7 @@ namespace FlaUI.Fluent
                 TreeScope.Parent => Element.FindAll(TreeScope, Conditions.Single()),
                 TreeScope.Ancestors => Element.FindAll(TreeScope, Conditions.Single()),
                 TreeScope.None => new []{ Element },
-                _ => throw new InvalidOperationException($"Unknown tree scope: {TreeScope}.")
+                _ => throw new ArgumentOutOfRangeException($"Unknown tree scope: {TreeScope}.")
             };
         }
 
@@ -345,7 +345,7 @@ namespace FlaUI.Fluent
         }
 
         /// <summary>
-        /// 
+        /// Returns matched elements.
         /// </summary>
         /// <returns></returns>
         public AutomationElement[] ToArray()
@@ -377,7 +377,7 @@ namespace FlaUI.Fluent
         }
 
         /// <summary>
-        /// 
+        /// Returns the element on the first match or <see langword="null"/>.
         /// </summary>
         /// <returns></returns>
         public AutomationElement? FirstOrDefault()
@@ -399,7 +399,7 @@ namespace FlaUI.Fluent
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException($"Unknown action type: {type}.");
                 }
             }
             
@@ -409,8 +409,9 @@ namespace FlaUI.Fluent
         }
 
         /// <summary>
-        /// 
+        /// Returns the element on the first match or throws an exception if it is not found.
         /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
         public AutomationElement First()
         {
@@ -421,7 +422,7 @@ namespace FlaUI.Fluent
         #endregion
 
         /// <summary>
-        /// 
+        /// Returns a textual view with modifiers.
         /// </summary>
         /// <returns></returns>
         public override string ToString()

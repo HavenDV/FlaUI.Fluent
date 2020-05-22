@@ -14,7 +14,7 @@
     <PackageProjectUrl>https://github.com/HavenDV/FlaUI.Fluent</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HavenDV/FlaUI.Fluent</RepositoryUrl>
     <PackageTags>FlaUI, FlaUI.Fluent, Fluent, UIA3, havendv, H</PackageTags>
-    <PackageReleaseNotes>Added Among info to modifiers</PackageReleaseNotes>
+    <PackageReleaseNotes>Added xml comments and exceptions</PackageReleaseNotes>
     <PackageLicenseFile></PackageLicenseFile>
     <Copyright>Copyright (c) 2020 havendv</Copyright>
     <RepositoryType>git</RepositoryType>

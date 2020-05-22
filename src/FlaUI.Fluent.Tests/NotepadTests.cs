@@ -9,7 +9,7 @@ namespace FlaUI.Fluent.Tests
     [TestFixture]
     public class NotepadTests : BaseTests
     {
-        #region Constructos
+        #region Constructors
 
         public NotepadTests() : base("notepad.exe")
         {

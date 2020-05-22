@@ -14,37 +14,19 @@ Fluent interface for FlaUI find queries
 using System;
 using System.Diagnostics;
 using System.Threading;
-using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
-using FlaUI.TestUtilities;
-using FlaUI.UIA3;
 using NUnit.Framework;
 
 namespace FlaUI.Fluent.Tests
 {
     [TestFixture]
-    public class NotepadTests : FlaUITestBase
+    public class NotepadTests : BaseTests
     {
-        #region Properties
+        #region Constructors
 
-        public TimeSpan Timeout { get; } = TimeSpan.FromSeconds(3);
-
-        #endregion
-
-        #region Overrides
-
-        protected override AutomationBase GetAutomation()
+        public NotepadTests() : base("notepad.exe")
         {
-            return new UIA3Automation();
-        }
-
-        protected override Application StartApplication()
-        {
-            return Application.Launch(new ProcessStartInfo("notepad.exe")
-            {
-                UseShellExecute = true,
-                WindowStyle = ProcessWindowStyle.Maximized,
-        });
+            ProcessStartInfo.WindowStyle = ProcessWindowStyle.Maximized;
         }
 
         #endregion
@@ -89,7 +71,6 @@ namespace FlaUI.Fluent.Tests
         }
     }
 }
-
 ```
 
 ### Used documentation

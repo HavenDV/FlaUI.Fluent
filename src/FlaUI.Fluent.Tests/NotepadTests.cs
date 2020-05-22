@@ -39,7 +39,9 @@ namespace FlaUI.Fluent.Tests
         [Test]
         public void SimpleTest()
         {
+#if !NETFRAMEWORK
             Thread.Sleep(TimeSpan.FromSeconds(1));
+#endif
 
             var window = Application.WaitMainWindow(
                 Automation, 

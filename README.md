@@ -7,7 +7,7 @@
 Fluent interface for FlaUI find queries
 
 ### Notes
-- `Application.WaitMainWindow` works correctly without `Thread.Sleep` before this only for .Net Framework
+- `Application.WaitMainWindow` works correctly without `Thread.Sleep` before this only for **.Net Framework**
 
 ### Example
 ```cs

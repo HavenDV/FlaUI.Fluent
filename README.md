@@ -5,6 +5,28 @@
 
 Fluent interface for FlaUI
 
+### Example
+```cs
+[Test]
+public void SimpleTest()
+{
+    Thread.Sleep(TimeSpan.FromSeconds(1));
+
+    var window = Application.WaitMainWindow(
+        Automation, 
+        builder => builder, 
+        Timeout);
+
+    // Set text
+    window
+        .BuildFind().AmongChildren().ByAutomationId("15").Retry(Timeout).First()
+        .Patterns
+        .Value
+        .Pattern
+        .SetValue("Hello, World!");
+}
+```
+
 ### Used documentation
 1. [FlaUI](https://github.com/FlaUI/FlaUI)
 2. [FlaUI Examples](https://github.com/FlaUI/FlaUI/blob/master/src/FlaUI.Core.UITests)
